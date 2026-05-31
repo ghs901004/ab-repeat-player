@@ -1,16 +1,18 @@
-# AB 复读机
+# AB Repeat Player
 
-一个简单的 MP3 AB 复读练习网站。
+A simple MP3 A/B repeat practice website.
 
-## 功能
+## Languages
 
-- 选择本地 MP3 文件
-- 锁定 A 点和 B 点
-- AB 片段循环播放
-- 支持 0.25x 到 4x 播放速度
-- 音频在浏览器本地处理，不上传到服务器
+- Chinese: `https://abrepeat.com/zh/`
+- English: `https://abrepeat.com/en/`
+- Spanish: `https://abrepeat.com/es/`
+- Japanese: `https://abrepeat.com/ja/`
 
-## 使用方式
+## Features
 
-打开网站后，点击“选择 MP3”，选择本地音频文件即可开始练习。
-
+- Choose a local MP3 file
+- Set point A and point B
+- Loop the A/B segment
+- Adjust playback speed from 0.25x to 4x
+- Audio is processed locally in the browser and is not uploaded to a server

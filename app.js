@@ -22,6 +22,87 @@ const slowerButton = document.querySelector("#slowerButton");
 const fasterButton = document.querySelector("#fasterButton");
 const presetButtons = [...document.querySelectorAll("[data-speed]")];
 
+const lang = document.body.dataset.lang || document.documentElement.lang.slice(0, 2) || "en";
+const copy = {
+  zh: {
+    unset: "未设置",
+    play: "播放",
+    pause: "暂停",
+    loopOnLabel: "AB 循环开",
+    loopOffLabel: "AB 循环关",
+    chooseMp3: "请选择 MP3 音频文件",
+    audioLoaded: "音频已载入",
+    ready: "可以开始播放并锁定 A/B 段",
+    playBlocked: "浏览器暂时没有开始播放，请再点一次播放",
+    aLocked: "A 点已锁定",
+    bLocked: "B 点已锁定",
+    bAfterA: "B 点需要在 A 点之后",
+    needSegment: "请先锁定 A 点和 B 点",
+    loopEnabled: "AB 循环已开启",
+    loopDisabled: "AB 循环已关闭",
+    cleared: "A/B 已清除",
+    audioError: "这个音频无法播放，请换一个 MP3 文件",
+  },
+  en: {
+    unset: "Not set",
+    play: "Play",
+    pause: "Pause",
+    loopOnLabel: "AB Loop On",
+    loopOffLabel: "AB Loop Off",
+    chooseMp3: "Please choose an MP3 audio file",
+    audioLoaded: "Audio loaded",
+    ready: "Ready to play and set A/B points",
+    playBlocked: "The browser did not start playback. Please tap Play again.",
+    aLocked: "Point A set",
+    bLocked: "Point B set",
+    bAfterA: "Point B must be after point A",
+    needSegment: "Set both A and B first",
+    loopEnabled: "AB loop is on",
+    loopDisabled: "AB loop is off",
+    cleared: "A/B cleared",
+    audioError: "This audio cannot be played. Please choose another MP3 file.",
+  },
+  es: {
+    unset: "Sin fijar",
+    play: "Reproducir",
+    pause: "Pausar",
+    loopOnLabel: "Bucle AB encendido",
+    loopOffLabel: "Bucle AB apagado",
+    chooseMp3: "Elige un archivo de audio MP3",
+    audioLoaded: "Audio cargado",
+    ready: "Listo para reproducir y fijar A/B",
+    playBlocked: "El navegador no inició la reproducción. Toca Reproducir otra vez.",
+    aLocked: "Punto A fijado",
+    bLocked: "Punto B fijado",
+    bAfterA: "El punto B debe estar después del punto A",
+    needSegment: "Primero fija los puntos A y B",
+    loopEnabled: "Bucle AB encendido",
+    loopDisabled: "Bucle AB apagado",
+    cleared: "A/B borrado",
+    audioError: "Este audio no se puede reproducir. Elige otro archivo MP3.",
+  },
+  ja: {
+    unset: "未設定",
+    play: "再生",
+    pause: "一時停止",
+    loopOnLabel: "ABループ オン",
+    loopOffLabel: "ABループ オフ",
+    chooseMp3: "MP3音声ファイルを選択してください",
+    audioLoaded: "音声を読み込みました",
+    ready: "再生してA/B地点を設定できます",
+    playBlocked: "ブラウザが再生を開始できませんでした。もう一度再生を押してください。",
+    aLocked: "A地点を設定しました",
+    bLocked: "B地点を設定しました",
+    bAfterA: "B地点はA地点より後にしてください",
+    needSegment: "先にA地点とB地点を設定してください",
+    loopEnabled: "ABループをオンにしました",
+    loopDisabled: "ABループをオフにしました",
+    cleared: "A/Bをクリアしました",
+    audioError: "この音声は再生できません。別のMP3ファイルを選択してください。",
+  },
+};
+const t = copy[lang] || copy.en;
+
 const state = {
   a: null,
   b: null,
@@ -94,7 +175,7 @@ function setSpeed(nextSpeed) {
 function setLoopActive(active) {
   state.loop = active;
   loopButton.classList.toggle("is-on", active);
-  loopButton.textContent = active ? "AB 循环开" : "AB 循环关";
+  loopButton.textContent = active ? t.loopOnLabel : t.loopOffLabel;
   loopButton.setAttribute("aria-pressed", String(active));
 }
 
@@ -116,8 +197,8 @@ function updateUi() {
   seekSlider.value = String(current);
   timeline.style.setProperty("--progress", `${clamp(progress, 0, 100)}%`);
 
-  aTime.textContent = state.a === null ? "未设置" : formatTime(state.a);
-  bTime.textContent = state.b === null ? "未设置" : formatTime(state.b);
+  aTime.textContent = state.a === null ? t.unset : formatTime(state.a);
+  bTime.textContent = state.b === null ? t.unset : formatTime(state.b);
 
   if (hasSegment() && duration) {
     const left = (state.a / duration) * 100;
@@ -147,7 +228,7 @@ function loadFile(file) {
   const isAudio = file.type.startsWith("audio/");
   const isMp3 = file.name.toLowerCase().endsWith(".mp3");
   if (!isAudio && !isMp3) {
-    showMessage("请选择 MP3 音频文件");
+    showMessage(t.chooseMp3);
     return;
   }
 
@@ -159,7 +240,7 @@ function loadFile(file) {
   audio.src = state.objectUrl;
   audio.load();
   fileName.textContent = file.name;
-  showMessage("音频已载入");
+  showMessage(t.audioLoaded);
   resetMarkers();
   setControlsEnabled(false);
 }
@@ -185,7 +266,7 @@ async function togglePlay() {
     try {
       await audio.play();
     } catch {
-      showMessage("浏览器暂时没有开始播放，请再点一次播放");
+      showMessage(t.playBlocked);
     }
   } else {
     audio.pause();
@@ -202,7 +283,7 @@ function setMarkerA() {
     state.b = null;
     setLoopActive(false);
   }
-  showMessage("A 点已锁定");
+  showMessage(t.aLocked);
   updateUi();
 }
 
@@ -217,25 +298,25 @@ function setMarkerB() {
   }
 
   if (current <= state.a + 0.1) {
-    showMessage("B 点需要在 A 点之后");
+    showMessage(t.bAfterA);
     updateUi();
     return;
   }
 
   state.b = current;
-  showMessage("B 点已锁定");
+  showMessage(t.bLocked);
   updateUi();
 }
 
 function toggleLoop() {
   if (!hasSegment()) {
-    showMessage("请先锁定 A 点和 B 点");
+    showMessage(t.needSegment);
     updateUi();
     return;
   }
 
   setLoopActive(!state.loop);
-  showMessage(state.loop ? "AB 循环已开启" : "AB 循环已关闭");
+  showMessage(state.loop ? t.loopEnabled : t.loopDisabled);
 
   if (state.loop && (audio.currentTime < state.a || audio.currentTime >= state.b)) {
     audio.currentTime = state.a;
@@ -275,20 +356,20 @@ dropZone.addEventListener("drop", (event) => {
 audio.addEventListener("loadedmetadata", () => {
   setControlsEnabled(true);
   setSpeed(speedSlider.value);
-  showMessage("可以开始播放并锁定 A/B 段");
+  showMessage(t.ready);
   updateUi();
 });
 
 audio.addEventListener("play", () => {
-  playButton.textContent = "暂停";
+  playButton.textContent = t.pause;
 });
 
 audio.addEventListener("pause", () => {
-  playButton.textContent = "播放";
+  playButton.textContent = t.play;
 });
 
 audio.addEventListener("ended", () => {
-  playButton.textContent = "播放";
+  playButton.textContent = t.play;
   if (state.loop && hasSegment()) {
     audio.currentTime = state.a;
     audio.play();
@@ -296,7 +377,7 @@ audio.addEventListener("ended", () => {
 });
 
 audio.addEventListener("error", () => {
-  showMessage("这个音频无法播放，请换一个 MP3 文件");
+  showMessage(t.audioError);
   setControlsEnabled(false);
 });
 
@@ -312,7 +393,7 @@ setAButton.addEventListener("click", setMarkerA);
 setBButton.addEventListener("click", setMarkerB);
 clearButton.addEventListener("click", () => {
   resetMarkers();
-  showMessage("A/B 已清除");
+  showMessage(t.cleared);
 });
 loopButton.addEventListener("click", toggleLoop);
 
@@ -334,5 +415,7 @@ presetButtons.forEach((button) => {
   });
 });
 
+setLoopActive(false);
 setSpeed(1);
+updateUi();
 monitorLoop();

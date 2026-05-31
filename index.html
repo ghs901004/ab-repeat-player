@@ -1,128 +1,56 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AB 复读机</title>
+    <title>AB Repeat Player - Choose Language</title>
     <meta
       name="description"
-      content="一个浏览器本地运行的 MP3 A/B 复读练习工具。"
+      content="Choose a language for AB Repeat Player, a browser-based MP3 A/B loop practice tool."
     />
+    <link rel="canonical" href="https://abrepeat.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://abrepeat.com/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://abrepeat.com/zh/" />
+    <link rel="alternate" hreflang="en" href="https://abrepeat.com/en/" />
+    <link rel="alternate" hreflang="es" href="https://abrepeat.com/es/" />
+    <link rel="alternate" hreflang="ja" href="https://abrepeat.com/ja/" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">MP3 本地练习</p>
-          <h1>AB 复读机</h1>
-        </div>
-        <label class="file-button" for="fileInput">选择 MP3</label>
-        <input id="fileInput" class="visually-hidden" type="file" accept="audio/mpeg,audio/mp3,.mp3" />
+    <main class="language-page">
+      <header class="language-hero">
+        <p class="eyebrow">MP3 A/B Loop Practice</p>
+        <h1>AB Repeat Player</h1>
+        <p>Choose your language to start practicing with a local MP3 file.</p>
       </header>
 
-      <section id="dropZone" class="drop-zone" aria-label="MP3 文件载入区">
-        <div class="drop-copy">
-          <strong id="fileName">还没有载入音频</strong>
-          <span id="statusText">请选择一个 MP3 文件</span>
-        </div>
-      </section>
-
-      <audio id="audio" preload="metadata"></audio>
-
-      <section class="player-surface" aria-label="复读播放器">
-        <div class="transport-row">
-          <button id="playButton" class="primary-button" type="button" disabled>播放</button>
-          <button id="backButton" class="icon-button" type="button" disabled aria-label="后退 5 秒">-5s</button>
-          <button id="forwardButton" class="icon-button" type="button" disabled aria-label="前进 5 秒">+5s</button>
-          <div class="time-readout" aria-live="polite">
-            <span id="currentTime">00:00.0</span>
-            <span>/</span>
-            <span id="durationTime">00:00.0</span>
-          </div>
-        </div>
-
-        <div
-          id="timeline"
-          class="timeline"
-          style="--progress: 0%; --segment-left: 0%; --segment-width: 0%;"
-        >
-          <div class="timeline-track"></div>
-          <div class="timeline-progress"></div>
-          <div class="timeline-segment"></div>
-          <input
-            id="seekSlider"
-            class="seek-slider"
-            type="range"
-            min="0"
-            max="0"
-            step="0.01"
-            value="0"
-            disabled
-            aria-label="播放进度"
-          />
-        </div>
-
-        <div class="marker-grid">
-          <div class="marker-panel">
-            <span class="marker-label">A 点</span>
-            <strong id="aTime">未设置</strong>
-            <button id="setAButton" type="button" disabled>锁定 A</button>
-          </div>
-          <div class="marker-panel">
-            <span class="marker-label">B 点</span>
-            <strong id="bTime">未设置</strong>
-            <button id="setBButton" type="button" disabled>锁定 B</button>
-          </div>
-          <div class="loop-panel">
-            <button id="loopButton" class="loop-button" type="button" disabled aria-pressed="false">AB 循环关</button>
-            <button id="clearButton" type="button" disabled>清除 A/B</button>
-          </div>
-        </div>
-
-        <section class="speed-panel" aria-label="播放速度">
-          <div class="speed-header">
-            <span>速度</span>
-            <strong id="speedValue">1.00x</strong>
-          </div>
-          <div class="speed-controls">
-            <button id="slowerButton" class="step-button" type="button" disabled>慢一点</button>
-            <input
-              id="speedSlider"
-              type="range"
-              min="0.25"
-              max="4"
-              step="0.05"
-              value="1"
-              disabled
-              aria-label="播放速度"
-            />
-            <button id="fasterButton" class="step-button" type="button" disabled>快一点</button>
-          </div>
-          <div class="speed-presets" aria-label="常用速度">
-            <button type="button" data-speed="0.25" disabled>0.25x</button>
-            <button type="button" data-speed="0.5" disabled>0.5x</button>
-            <button type="button" data-speed="0.75" disabled>0.75x</button>
-            <button type="button" data-speed="1" disabled class="is-active">1x</button>
-            <button type="button" data-speed="1.25" disabled>1.25x</button>
-            <button type="button" data-speed="1.5" disabled>1.5x</button>
-            <button type="button" data-speed="2" disabled>2x</button>
-            <button type="button" data-speed="3" disabled>3x</button>
-            <button type="button" data-speed="4" disabled>4x</button>
-          </div>
-        </section>
+      <section class="language-grid" aria-label="Language options">
+        <a class="language-card" href="zh/" hreflang="zh-CN" lang="zh-CN">
+          <span>中文</span>
+          <strong>AB 复读机</strong>
+        </a>
+        <a class="language-card" href="en/" hreflang="en" lang="en">
+          <span>English</span>
+          <strong>AB Repeat Player</strong>
+        </a>
+        <a class="language-card" href="es/" hreflang="es" lang="es">
+          <span>Español</span>
+          <strong>Repetidor AB</strong>
+        </a>
+        <a class="language-card" href="ja/" hreflang="ja" lang="ja">
+          <span>日本語</span>
+          <strong>ABリピートプレーヤー</strong>
+        </a>
       </section>
     </main>
 
-    <footer class="ad-footer" aria-label="广告区域">
+    <footer class="ad-footer" aria-label="Advertising area">
       <div class="ad-slot">
-        <span>广告位 1</span>
+        <span>Ad slot 1</span>
       </div>
       <div class="ad-slot">
-        <span>广告位 2</span>
+        <span>Ad slot 2</span>
       </div>
     </footer>
-
-    <script src="app.js"></script>
   </body>
 </html>

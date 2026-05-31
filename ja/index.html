@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ABリピートプレーヤー | MP3 A/B ループ練習</title>
+    <meta
+      name="description"
+      content="ブラウザで使えるMP3のABリピート練習ツール。A/B地点を設定し、区間ループと0.25xから4xまでの速度調整に対応。"
+    />
+    <link rel="canonical" href="https://abrepeat.com/ja/" />
+    <link rel="alternate" hreflang="x-default" href="https://abrepeat.com/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://abrepeat.com/zh/" />
+    <link rel="alternate" hreflang="en" href="https://abrepeat.com/en/" />
+    <link rel="alternate" hreflang="es" href="https://abrepeat.com/es/" />
+    <link rel="alternate" hreflang="ja" href="https://abrepeat.com/ja/" />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body data-lang="ja">
+    <main class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ローカルMP3練習</p>
+          <h1>ABリピート</h1>
+        </div>
+        <div class="header-actions">
+          <nav class="language-switcher" aria-label="言語">
+            <a href="../zh/" lang="zh-CN">中文</a>
+            <a href="../en/" lang="en">EN</a>
+            <a href="../es/" lang="es">ES</a>
+            <a href="../ja/" aria-current="page">日本語</a>
+          </nav>
+          <label class="file-button" for="fileInput">MP3を選択</label>
+        </div>
+        <input id="fileInput" class="visually-hidden" type="file" accept="audio/mpeg,audio/mp3,.mp3" />
+      </header>
+
+      <section id="dropZone" class="drop-zone" aria-label="MP3ファイルエリア">
+        <div class="drop-copy">
+          <strong id="fileName">音声はまだ読み込まれていません</strong>
+          <span id="statusText">MP3ファイルを選択してください</span>
+        </div>
+      </section>
+
+      <audio id="audio" preload="metadata"></audio>
+
+      <section class="player-surface" aria-label="リピートプレーヤー">
+        <div class="transport-row">
+          <button id="playButton" class="primary-button" type="button" disabled>再生</button>
+          <button id="backButton" class="icon-button" type="button" disabled aria-label="5秒戻る">-5s</button>
+          <button id="forwardButton" class="icon-button" type="button" disabled aria-label="5秒進む">+5s</button>
+          <div class="time-readout" aria-live="polite">
+            <span id="currentTime">00:00.0</span>
+            <span>/</span>
+            <span id="durationTime">00:00.0</span>
+          </div>
+        </div>
+
+        <div
+          id="timeline"
+          class="timeline"
+          style="--progress: 0%; --segment-left: 0%; --segment-width: 0%;"
+        >
+          <div class="timeline-track"></div>
+          <div class="timeline-progress"></div>
+          <div class="timeline-segment"></div>
+          <input
+            id="seekSlider"
+            class="seek-slider"
+            type="range"
+            min="0"
+            max="0"
+            step="0.01"
+            value="0"
+            disabled
+            aria-label="再生位置"
+          />
+        </div>
+
+        <div class="marker-grid">
+          <div class="marker-panel">
+            <span class="marker-label">A地点</span>
+            <strong id="aTime">未設定</strong>
+            <button id="setAButton" type="button" disabled>Aを設定</button>
+          </div>
+          <div class="marker-panel">
+            <span class="marker-label">B地点</span>
+            <strong id="bTime">未設定</strong>
+            <button id="setBButton" type="button" disabled>Bを設定</button>
+          </div>
+          <div class="loop-panel">
+            <button id="loopButton" class="loop-button" type="button" disabled aria-pressed="false">ABループ オフ</button>
+            <button id="clearButton" type="button" disabled>A/Bをクリア</button>
+          </div>
+        </div>
+
+        <section class="speed-panel" aria-label="再生速度">
+          <div class="speed-header">
+            <span>速度</span>
+            <strong id="speedValue">1.00x</strong>
+          </div>
+          <div class="speed-controls">
+            <button id="slowerButton" class="step-button" type="button" disabled>遅く</button>
+            <input
+              id="speedSlider"
+              type="range"
+              min="0.25"
+              max="4"
+              step="0.05"
+              value="1"
+              disabled
+              aria-label="再生速度"
+            />
+            <button id="fasterButton" class="step-button" type="button" disabled>速く</button>
+          </div>
+          <div class="speed-presets" aria-label="速度プリセット">
+            <button type="button" data-speed="0.25" disabled>0.25x</button>
+            <button type="button" data-speed="0.5" disabled>0.5x</button>
+            <button type="button" data-speed="0.75" disabled>0.75x</button>
+            <button type="button" data-speed="1" disabled class="is-active">1x</button>
+            <button type="button" data-speed="1.25" disabled>1.25x</button>
+            <button type="button" data-speed="1.5" disabled>1.5x</button>
+            <button type="button" data-speed="2" disabled>2x</button>
+            <button type="button" data-speed="3" disabled>3x</button>
+            <button type="button" data-speed="4" disabled>4x</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="ad-footer" aria-label="広告エリア">
+      <div class="ad-slot">
+        <span>広告枠 1</span>
+      </div>
+      <div class="ad-slot">
+        <span>広告枠 2</span>
+      </div>
+    </footer>
+
+    <script src="../app.js"></script>
+  </body>
+</html>

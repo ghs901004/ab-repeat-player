@@ -84,6 +84,100 @@ button:disabled {
   margin-bottom: 18px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.language-switcher a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.language-switcher a[aria-current="page"] {
+  color: #ffffff;
+  background: var(--blue);
+}
+
+.language-page {
+  display: grid;
+  width: min(960px, calc(100% - 32px));
+  gap: 24px;
+  margin: 46px auto 28px;
+}
+
+.language-hero {
+  display: grid;
+  gap: 12px;
+}
+
+.language-hero p {
+  max-width: 620px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.language-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.language-card {
+  display: grid;
+  gap: 8px;
+  min-height: 140px;
+  align-content: center;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.94);
+  text-decoration: none;
+  box-shadow: 0 12px 32px rgba(23, 32, 26, 0.08);
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.language-card:hover {
+  border-color: rgba(22, 122, 91, 0.52);
+  transform: translateY(-2px);
+}
+
+.language-card span {
+  color: var(--accent-strong);
+  font-size: 0.92rem;
+  font-weight: 850;
+}
+
+.language-card strong {
+  font-size: 1.18rem;
+  line-height: 1.25;
+}
+
 .eyebrow {
   margin: 0 0 4px;
   color: var(--accent-strong);
@@ -358,6 +452,20 @@ h1 {
     flex-direction: column;
   }
 
+  .header-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .language-switcher {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .language-switcher a {
+    padding: 0 6px;
+  }
+
   .file-button {
     width: 100%;
   }
@@ -389,6 +497,15 @@ h1 {
 
   .speed-presets {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .language-page {
+    width: min(100% - 22px, 960px);
+    margin-top: 24px;
+  }
+
+  .language-grid {
+    grid-template-columns: 1fr;
   }
 }
 
