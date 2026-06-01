@@ -440,6 +440,75 @@ h1 {
   font-weight: 800;
 }
 
+.site-footer {
+  display: grid;
+  width: min(960px, calc(100% - 32px));
+  gap: 10px;
+  margin: 0 auto 34px;
+  padding-top: 4px;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.site-footer p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+.footer-links a,
+.text-link {
+  color: var(--accent-strong);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.text-link:hover {
+  text-decoration: underline;
+}
+
+.content-page {
+  display: grid;
+  width: min(840px, calc(100% - 32px));
+  gap: 16px;
+  margin: 36px auto 24px;
+}
+
+.content-switcher {
+  justify-self: start;
+}
+
+.content-panel {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.content-panel h1 {
+  margin-bottom: 18px;
+}
+
+.content-panel h2 {
+  margin: 26px 0 8px;
+  font-size: 1.26rem;
+  letter-spacing: 0;
+}
+
+.content-panel p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     width: min(100% - 22px, 960px);
@@ -506,6 +575,19 @@ h1 {
 
   .language-grid {
     grid-template-columns: 1fr;
+  }
+
+  .site-footer,
+  .content-page {
+    width: min(100% - 22px, 960px);
+  }
+
+  .content-switcher {
+    justify-self: stretch;
+  }
+
+  .content-panel {
+    padding: 18px;
   }
 }
 
