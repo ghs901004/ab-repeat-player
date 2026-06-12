@@ -16,11 +16,13 @@ A simple MP3 A/B repeat practice website.
 - Loop the A/B segment
 - Adjust playback speed from 0.25x to 4x
 - Audio is processed locally in the browser and is not uploaded to a server
+- Original practice guide content is included on each language page
 
 ## Site Pages
 
 - About pages
 - Privacy policy pages
 - Contact pages
+- `ads.txt`
 - `robots.txt`
 - `sitemap.xml`
