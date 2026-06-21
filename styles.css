@@ -549,6 +549,18 @@ h1 {
   line-height: 1.72;
 }
 
+.content-panel ol,
+.content-panel ul {
+  margin: 0 0 16px;
+  padding-left: 1.35rem;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.content-panel li + li {
+  margin-top: 6px;
+}
+
 @media (max-width: 760px) {
   .app-shell {
     width: min(100% - 22px, 960px);

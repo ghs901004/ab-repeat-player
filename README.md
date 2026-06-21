@@ -20,6 +20,8 @@ A simple MP3 A/B repeat practice website.
 
 ## Site Pages
 
+- Practice guide pages
+- FAQ pages
 - About pages
 - Privacy policy pages
 - Contact pages
